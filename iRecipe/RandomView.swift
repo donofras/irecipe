@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct RandomView: View {
+    
+    @ObservedObject var viewModel = RandomViewModel()
+    
     var body: some View {
         Text("RandomView")
     }

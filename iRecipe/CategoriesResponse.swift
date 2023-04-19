@@ -17,4 +17,8 @@ struct Category: Codable {
     let idCategory, strCategory: String
     let strCategoryThumb: String
     let strCategoryDescription: String
+    
+    var previewUrl: URL? {
+        return URL(string: strCategoryThumb)
+    }
 }
