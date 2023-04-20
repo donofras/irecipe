@@ -22,6 +22,7 @@ struct CategoriesView: View {
                             KFImage(category.previewUrl)
                                 .cancelOnDisappear(true)
                                 .resizable()
+                                .scaledToFit()
                                 .frame(width: 50, height: 50)
                             
                             VStack(alignment: .leading) {

@@ -19,10 +19,9 @@ class RandomViewModel: ObservableObject {
     
     init( dataManager: NetworkProtocol = NetworkService.shared) {
         self.dataManager = dataManager
-        getChatList()
     }
     
-    func getChatList() {
+    func getRandomMeal() {
         dataManager.fetchRandomMeal()
             .sink { (dataResponse) in
                 if dataResponse.error != nil {
