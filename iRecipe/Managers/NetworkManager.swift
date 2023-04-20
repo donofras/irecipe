@@ -27,12 +27,12 @@ protocol NetworkProtocol {
     func fetchMealByName(name: String) -> AnyPublisher<DataResponse<MealResponse, NetworkError>, Never>
 }
 
-class NetworkService {
-    static let shared: NetworkProtocol = NetworkService()
+final class NetworkManager {
+    static let shared: NetworkProtocol = NetworkManager()
     private init() { }
 }
 
-extension NetworkService: NetworkProtocol {
+extension NetworkManager: NetworkProtocol {
     func fetchCategories() -> AnyPublisher<DataResponse<CategoriesResponse, NetworkError>, Never> {
         return AF.request("https://www.themealdb.com/api/json/v1/1/categories.php", method: .get)
             .validate()

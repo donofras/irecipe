@@ -53,7 +53,6 @@ struct MealsListView: View {
         .navigationDestination(isPresented: $viewModel.showMeal, destination: {
             MealView(viewModel: .init(meal: viewModel.selectedMeal))
         })
-        
     }
 }
 

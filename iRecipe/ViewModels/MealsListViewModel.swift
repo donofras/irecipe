@@ -20,7 +20,7 @@ class MealsListViewModel: ObservableObject {
     var dataManager: NetworkProtocol
     var mealCategory: String
     
-    init(dataManager: NetworkProtocol = NetworkService.shared, mealCategory: String) {
+    init(dataManager: NetworkProtocol = NetworkManager.shared, mealCategory: String) {
         self.dataManager = dataManager
         self.mealCategory = mealCategory
         

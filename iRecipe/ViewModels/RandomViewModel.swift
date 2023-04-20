@@ -17,7 +17,7 @@ class RandomViewModel: ObservableObject {
     private var cancellableSet: Set<AnyCancellable> = []
     var dataManager: NetworkProtocol
     
-    init( dataManager: NetworkProtocol = NetworkService.shared) {
+    init( dataManager: NetworkProtocol = NetworkManager.shared) {
         self.dataManager = dataManager
     }
     

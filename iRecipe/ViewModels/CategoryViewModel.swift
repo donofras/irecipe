@@ -19,9 +19,9 @@ class CategoryViewModel: ObservableObject {
     @Published var showMeal = false
 
     private var cancellableSet: Set<AnyCancellable> = []
-    var dataManager: NetworkProtocol
+    private var dataManager: NetworkProtocol
     
-    init( dataManager: NetworkProtocol = NetworkService.shared) {
+    init( dataManager: NetworkProtocol = NetworkManager.shared) {
         self.dataManager = dataManager
         getAllCategories()
         

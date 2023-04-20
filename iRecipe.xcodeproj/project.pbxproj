@@ -17,7 +17,7 @@
 		130BF0E629EFC22F00EBEC32 /* MealResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130BF0E529EFC22F00EBEC32 /* MealResponse.swift */; };
 		130BF0E829EFC3F500EBEC32 /* CategoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130BF0E729EFC3F500EBEC32 /* CategoriesResponse.swift */; };
 		130BF0EB29EFD0B500EBEC32 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 130BF0EA29EFD0B500EBEC32 /* Alamofire */; };
-		130BF0ED29EFD12600EBEC32 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130BF0EC29EFD12600EBEC32 /* NetworkService.swift */; };
+		130BF0ED29EFD12600EBEC32 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130BF0EC29EFD12600EBEC32 /* NetworkManager.swift */; };
 		130BF0EF29EFD2A400EBEC32 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130BF0EE29EFD2A400EBEC32 /* CategoryViewModel.swift */; };
 		130BF0F129EFD6E000EBEC32 /* RandomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130BF0F029EFD6E000EBEC32 /* RandomViewModel.swift */; };
 		130BF0F429EFDC3800EBEC32 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 130BF0F329EFDC3800EBEC32 /* Kingfisher */; };
@@ -28,6 +28,9 @@
 		13C4055829F1186E00CC5140 /* MealsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C4055729F1186E00CC5140 /* MealsListViewModel.swift */; };
 		13C4056529F1703B00CC5140 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 13C4056429F1703B00CC5140 /* Realm */; };
 		13C4056729F1703B00CC5140 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 13C4056629F1703B00CC5140 /* RealmSwift */; };
+		13C4056929F175EA00CC5140 /* SavedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C4056829F175EA00CC5140 /* SavedViewModel.swift */; };
+		13C4056B29F1AEA900CC5140 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C4056A29F1AEA900CC5140 /* RealmManager.swift */; };
+		13C4056D29F1AEE600CC5140 /* MealObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C4056C29F1AEE600CC5140 /* MealObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +44,7 @@
 		130BF0E329EFB96500EBEC32 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
 		130BF0E529EFC22F00EBEC32 /* MealResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealResponse.swift; sourceTree = "<group>"; };
 		130BF0E729EFC3F500EBEC32 /* CategoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesResponse.swift; sourceTree = "<group>"; };
-		130BF0EC29EFD12600EBEC32 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		130BF0EC29EFD12600EBEC32 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		130BF0EE29EFD2A400EBEC32 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		130BF0F029EFD6E000EBEC32 /* RandomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomViewModel.swift; sourceTree = "<group>"; };
 		13AB1E8D29F02844006DBA7C /* MealView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealView.swift; sourceTree = "<group>"; };
@@ -49,6 +52,9 @@
 		13C4055329F1152A00CC5140 /* MealListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListResponse.swift; sourceTree = "<group>"; };
 		13C4055529F1185C00CC5140 /* MealsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsListView.swift; sourceTree = "<group>"; };
 		13C4055729F1186E00CC5140 /* MealsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsListViewModel.swift; sourceTree = "<group>"; };
+		13C4056829F175EA00CC5140 /* SavedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewModel.swift; sourceTree = "<group>"; };
+		13C4056A29F1AEA900CC5140 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		13C4056C29F1AEE600CC5140 /* MealObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +95,7 @@
 				13C4054C29F10DB600CC5140 /* Views */,
 				13C4054E29F10DC900CC5140 /* ViewModels */,
 				13C4054D29F10DBC00CC5140 /* Models */,
-				13C4055029F10E8900CC5140 /* Networking */,
+				13C4055029F10E8900CC5140 /* Managers */,
 				130BF0D329EFB7EF00EBEC32 /* Assets.xcassets */,
 				130BF0D529EFB7EF00EBEC32 /* Preview Content */,
 			);
@@ -123,6 +129,7 @@
 				130BF0E529EFC22F00EBEC32 /* MealResponse.swift */,
 				130BF0E729EFC3F500EBEC32 /* CategoriesResponse.swift */,
 				13C4055329F1152A00CC5140 /* MealListResponse.swift */,
+				13C4056C29F1AEE600CC5140 /* MealObject.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -134,6 +141,7 @@
 				130BF0F029EFD6E000EBEC32 /* RandomViewModel.swift */,
 				13C4055129F10F0900CC5140 /* MealViewModel.swift */,
 				13C4055729F1186E00CC5140 /* MealsListViewModel.swift */,
+				13C4056829F175EA00CC5140 /* SavedViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -146,12 +154,13 @@
 			path = Lifecycle;
 			sourceTree = "<group>";
 		};
-		13C4055029F10E8900CC5140 /* Networking */ = {
+		13C4055029F10E8900CC5140 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				130BF0EC29EFD12600EBEC32 /* NetworkService.swift */,
+				130BF0EC29EFD12600EBEC32 /* NetworkManager.swift */,
+				13C4056A29F1AEA900CC5140 /* RealmManager.swift */,
 			);
-			path = Networking;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,10 +246,12 @@
 			files = (
 				130BF0E029EFB93E00EBEC32 /* CategoriesView.swift in Sources */,
 				130BF0E229EFB95200EBEC32 /* RandomView.swift in Sources */,
-				130BF0ED29EFD12600EBEC32 /* NetworkService.swift in Sources */,
+				130BF0ED29EFD12600EBEC32 /* NetworkManager.swift in Sources */,
 				130BF0E429EFB96500EBEC32 /* SavedView.swift in Sources */,
 				130BF0E629EFC22F00EBEC32 /* MealResponse.swift in Sources */,
 				13C4055229F10F0900CC5140 /* MealViewModel.swift in Sources */,
+				13C4056B29F1AEA900CC5140 /* RealmManager.swift in Sources */,
+				13C4056D29F1AEE600CC5140 /* MealObject.swift in Sources */,
 				130BF0D029EFB7ED00EBEC32 /* iRecipeApp.swift in Sources */,
 				13C4055629F1185C00CC5140 /* MealsListView.swift in Sources */,
 				13C4055829F1186E00CC5140 /* MealsListViewModel.swift in Sources */,
@@ -249,6 +260,7 @@
 				13AB1E8E29F02844006DBA7C /* MealView.swift in Sources */,
 				130BF0EF29EFD2A400EBEC32 /* CategoryViewModel.swift in Sources */,
 				130BF0DE29EFB8E500EBEC32 /* TabBarNavigation.swift in Sources */,
+				13C4056929F175EA00CC5140 /* SavedViewModel.swift in Sources */,
 				130BF0F129EFD6E000EBEC32 /* RandomViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
