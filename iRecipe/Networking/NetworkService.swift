@@ -34,9 +34,7 @@ class NetworkService {
 
 extension NetworkService: NetworkProtocol {
     func fetchCategories() -> AnyPublisher<DataResponse<CategoriesResponse, NetworkError>, Never> {
-        let url = URL(string: "https://www.themealdb.com/api/json/v1/1/categories.php")!
-        
-        return AF.request(url, method: .get)
+        return AF.request("https://www.themealdb.com/api/json/v1/1/categories.php", method: .get)
             .validate()
             .publishDecodable(type: CategoriesResponse.self)
             .map { response in
@@ -50,9 +48,7 @@ extension NetworkService: NetworkProtocol {
     }
     
     func fetchRandomMeal() -> AnyPublisher<DataResponse<MealResponse, NetworkError>, Never> {
-        let url = URL(string: "https://www.themealdb.com/api/json/v1/1/random.php")!
-        
-        return AF.request(url, method: .get)
+        return AF.request("https://www.themealdb.com/api/json/v1/1/random.php", method: .get)
             .validate()
             .publishDecodable(type: MealResponse.self)
             .map { response in
@@ -66,9 +62,7 @@ extension NetworkService: NetworkProtocol {
     }
     
     func fetchMealsByCategory(category: String) -> AnyPublisher<Alamofire.DataResponse<MealListResponse, NetworkError>, Never> {
-        let url = URL(string: "https://www.themealdb.com/api/json/v1/1/filter.php?c=\(category)")!
-        
-        return AF.request(url, method: .get)
+        return AF.request("https://www.themealdb.com/api/json/v1/1/filter.php?c=\(category)", method: .get)
             .validate()
             .publishDecodable(type: MealListResponse.self)
             .map { response in
@@ -82,9 +76,7 @@ extension NetworkService: NetworkProtocol {
     }
     
     func fetchMealById(id: String) -> AnyPublisher<Alamofire.DataResponse<MealResponse, NetworkError>, Never> {
-        let url = URL(string: "https://www.themealdb.com/api/json/v1/1/lookup.php?i=\(id)")!
-        
-        return AF.request(url, method: .get)
+        return AF.request( "https://www.themealdb.com/api/json/v1/1/lookup.php?i=\(id)", method: .get)
             .validate()
             .publishDecodable(type: MealResponse.self)
             .map { response in
@@ -98,9 +90,7 @@ extension NetworkService: NetworkProtocol {
     }
     
     func fetchMealByName(name: String) -> AnyPublisher<Alamofire.DataResponse<MealResponse, NetworkError>, Never> {
-        let url = URL(string: "https://www.themealdb.com/api/json/v1/1/search.php?s=\(name)")!
-        
-        return AF.request(url, method: .get)
+        return AF.request("https://www.themealdb.com/api/json/v1/1/search.php?s=\(name)", method: .get)
             .validate()
             .publishDecodable(type: MealResponse.self)
             .map { response in

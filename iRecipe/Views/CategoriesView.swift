@@ -47,6 +47,9 @@ struct CategoriesView: View {
                         }
                         .padding(.vertical, 8)
                         .padding(.horizontal)
+                        .navigationDestination(isPresented: $viewModel.showMeal, destination: {
+                            MealView(viewModel: .init(meal: viewModel.selectedMeal))
+                        })
                     } else {
                         ForEach(viewModel.categories, id: \.idCategory) { category in
                             NavigationLink(destination: MealsListView(viewModel: .init(mealCategory: category.strCategory))) {
@@ -74,9 +77,6 @@ struct CategoriesView: View {
                 }
             }
         }
-        .navigationDestination(isPresented: $viewModel.showMeal, destination: {
-            MealView(viewModel: .init(meal: viewModel.selectedMeal))
-        })
         .searchable(text: $viewModel.searchText, prompt: "Look for recipes")
     }
 }
