@@ -24,6 +24,7 @@ protocol NetworkProtocol {
     func fetchRandomMeal() -> AnyPublisher<DataResponse<MealResponse, NetworkError>, Never>
     func fetchMealsByCategory(category: String) -> AnyPublisher<DataResponse<MealListResponse, NetworkError>, Never>
     func fetchMealById(id: String) -> AnyPublisher<DataResponse<MealResponse, NetworkError>, Never>
+    func fetchMealByName(name: String) -> AnyPublisher<DataResponse<MealResponse, NetworkError>, Never>
 }
 
 class NetworkService {
@@ -82,6 +83,22 @@ extension NetworkService: NetworkProtocol {
     
     func fetchMealById(id: String) -> AnyPublisher<Alamofire.DataResponse<MealResponse, NetworkError>, Never> {
         let url = URL(string: "https://www.themealdb.com/api/json/v1/1/lookup.php?i=\(id)")!
+        
+        return AF.request(url, method: .get)
+            .validate()
+            .publishDecodable(type: MealResponse.self)
+            .map { response in
+                response.mapError { error in
+                    let backendError = response.data.flatMap { try? JSONDecoder().decode(BackendError.self, from: $0)}
+                    return NetworkError(initialError: error, backendError: backendError)
+                }
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchMealByName(name: String) -> AnyPublisher<Alamofire.DataResponse<MealResponse, NetworkError>, Never> {
+        let url = URL(string: "https://www.themealdb.com/api/json/v1/1/search.php?s=\(name)")!
         
         return AF.request(url, method: .get)
             .validate()

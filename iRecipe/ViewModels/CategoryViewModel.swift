@@ -11,31 +11,73 @@ import Combine
 class CategoryViewModel: ObservableObject {
     
     @Published var categories =  [Category]()
+    @Published var recipse = [Meal]()
     @Published var loadingError: String = ""
     @Published var showAlert: Bool = false
     @Published var searchText = ""
+    @Published var selectedMeal: Meal?
+    @Published var showMeal = false
 
     private var cancellableSet: Set<AnyCancellable> = []
     var dataManager: NetworkProtocol
     
     init( dataManager: NetworkProtocol = NetworkService.shared) {
         self.dataManager = dataManager
-        getChatList()
+        getAllCategories()
+        
+        $searchText
+            .debounce(for: .seconds(0.5), scheduler: RunLoop.main)
+            .sink(receiveValue: { [weak self] searchText in
+            guard let `self` = self else { return }
+            
+            self.searchByName(name: searchText)
+            
+        }).store(in: &cancellableSet)
     }
     
-    func getChatList() {
+    func getAllCategories() {
         dataManager.fetchCategories()
+            .sink { [weak self] (dataResponse) in
+                guard let `self` = self else { return }
+                if dataResponse.error != nil {
+                    self.createAlert(with: dataResponse.error!)
+                } else {
+                    self.categories = dataResponse.value?.categories ?? []
+                }
+            }.store(in: &cancellableSet)
+    }
+    
+    func getMealById(id: String) {
+        dataManager.fetchMealById(id: id)
             .sink { (dataResponse) in
                 if dataResponse.error != nil {
                     self.createAlert(with: dataResponse.error!)
                 } else {
-                    self.categories = dataResponse.value!.categories
+                    self.selectedMeal = dataResponse.value?.meals?.first
+                    self.showMeal = true
+                }
+            }.store(in: &cancellableSet)
+    }
+    
+    
+    func searchByName(name: String) {
+        guard name.count > 0 else {
+            recipse = []
+            return
+        }
+        dataManager.fetchMealByName(name: name)
+            .sink { [weak self] (dataResponse) in
+                guard let `self` = self else { return }
+                if dataResponse.error != nil {
+                    self.createAlert(with: dataResponse.error!)
+                } else {
+                    self.recipse = dataResponse.value?.meals ?? []
                 }
             }.store(in: &cancellableSet)
     }
     
     func createAlert( with error: NetworkError ) {
         loadingError = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.message
-        self.showAlert = true
+        showAlert = true
     }
 }
