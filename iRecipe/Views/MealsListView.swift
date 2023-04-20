@@ -1,36 +1,43 @@
 //
-//  CategoriesView.swift
+//  MealsListView.swift
 //  iRecipe
 //
-//  Created by Denis Onofras on 19.04.2023.
+//  Created by Denis Onofras on 20.04.2023.
 //
 
 import SwiftUI
 import Kingfisher
 
-struct CategoriesView: View {
+struct MealsListView: View {
     
-    @ObservedObject var viewModel = CategoryViewModel()
+    @ObservedObject var viewModel: MealsListViewModel
+    
+    init(viewModel: MealsListViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVStack {
-                    ForEach(viewModel.categories, id: \.idCategory) { category in
-                        
-                        NavigationLink(destination: MealsListView(viewModel: .init(mealCategory: category.strCategory))) {
+                    ForEach(viewModel.meals, id: \.idMeal) { meal in
+                        Button {
+                            viewModel.getMealById(id: meal.idMeal)
+                        } label: {
                             HStack {
-                                KFImage(category.previewUrl)
+                                KFImage(meal.previewUrl)
                                     .cancelOnDisappear(true)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 50, height: 50)
+                                    .cornerRadius(8)
                                 
                                 VStack(alignment: .leading) {
-                                    Text(category.strCategory)
+                                    Text(meal.strMeal)
                                         .font(.title2)
                                         .fontWeight(.semibold)
                                 }
+                                .padding(.horizontal)
                                 
                                 Spacer()
                                 
@@ -42,12 +49,18 @@ struct CategoriesView: View {
                 }
             }
         }
-        .searchable(text: $viewModel.searchText, prompt: "Look for recipes")
+        .navigationTitle("Category: \(viewModel.mealCategory)")
+        .navigationDestination(isPresented: $viewModel.showMeal, destination: {
+            MealView(viewModel: .init(meal: viewModel.selectedMeal))
+        })
+        
     }
 }
 
-struct CategoriesView_Previews: PreviewProvider {
+struct MealsListView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesView()
+        NavigationStack {
+            MealsListView(viewModel: .init(mealCategory: "Seafood"))
+        }
     }
 }

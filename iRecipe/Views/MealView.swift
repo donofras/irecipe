@@ -19,20 +19,20 @@ struct MealView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                KFImage(viewModel.meal.previewUrl)
+                KFImage(viewModel.meal?.previewUrl)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 200)
                     .cornerRadius(16)
                     .padding()
                 
-                if let strInstructions = viewModel.meal.strInstructions {
+                if let strInstructions = viewModel.meal?.strInstructions {
                     Text(strInstructions)
                         .font(.system(size: 14, weight: .regular))
                         .padding()
                 }
                 
-                if let category = viewModel.meal.strCategory {
+                if let category = viewModel.meal?.strCategory {
                     HStack(spacing: 16) {
                         Text("Category:")
                             .font(.system(size: 16, weight: .semibold))
@@ -45,7 +45,7 @@ struct MealView: View {
                     .padding(.horizontal)
                 }
                 
-                if let area = viewModel.meal.strArea {
+                if let area = viewModel.meal?.strArea {
                     HStack(spacing: 16) {
                         Text("Area:")
                             .font(.system(size: 16, weight: .semibold))
@@ -62,7 +62,7 @@ struct MealView: View {
                     Text("Ingredinets: ")
                         .font(.system(size: 18, weight: .semibold))
                         .padding()
-                    ForEach( viewModel.meal.ingredientsWithMeasures, id: \.self) { ingredinet in
+                    ForEach( viewModel.meal?.ingredientsWithMeasures ?? [], id: \.self) { ingredinet in
                         Text(ingredinet)
                             .font(.system(size: 14, weight: .regular))
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -73,7 +73,7 @@ struct MealView: View {
                 Spacer(minLength: 50)
             }
         }
-        .navigationTitle(viewModel.meal.strMeal)
+        .navigationTitle(viewModel.meal?.strMeal ?? "")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {

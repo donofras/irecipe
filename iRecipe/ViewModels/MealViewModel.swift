@@ -10,10 +10,10 @@ import Combine
 
 class MealViewModel: ObservableObject {
     
-    @Published var meal: Meal
+    @Published var meal: Meal?
     @Published var isSaved: Bool = false
 
-    init(meal: Meal) {
+    init(meal: Meal?) {
         self.meal = meal
     }
     
