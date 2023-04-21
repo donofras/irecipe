@@ -15,6 +15,7 @@ class MealsListViewModel: ObservableObject {
     @Published var showMeal = false
     @Published var loadingError: String = ""
     @Published var showAlert: Bool = false
+    @Published var isLoading = false
 
     private var cancellableSet: Set<AnyCancellable> = []
     var dataManager: NetworkProtocol
@@ -28,30 +29,37 @@ class MealsListViewModel: ObservableObject {
     }
     
     private func getMeals() {
+        isLoading = true
         dataManager.fetchMealsByCategory(category: mealCategory)
-            .sink { (dataResponse) in
+            .sink { [weak self] (dataResponse) in
+                guard let `self` = self else { return }
                 if dataResponse.error != nil {
                     self.createAlert(with: dataResponse.error!)
                 } else {
                     self.meals = dataResponse.value!.meals
+                    self.isLoading = false
                 }
             }.store(in: &cancellableSet)
     }
     
     func getMealById(id: String) {
+        isLoading = true
         dataManager.fetchMealById(id: id)
-            .sink { (dataResponse) in
+            .sink { [weak self] (dataResponse) in
+                guard let `self` = self else { return }
                 if dataResponse.error != nil {
                     self.createAlert(with: dataResponse.error!)
                 } else {
                     self.selectedMeal = dataResponse.value!.meals?.first
                     self.showMeal = true
+                    self.isLoading = false
                 }
             }.store(in: &cancellableSet)
     }
     
     func createAlert( with error: NetworkError ) {
         loadingError = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.message
-        self.showAlert = true
+        showAlert = true
+        isLoading = false
     }
 }

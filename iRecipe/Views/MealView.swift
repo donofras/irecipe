@@ -9,12 +9,6 @@ import SwiftUI
 import Kingfisher
 import RealmSwift
 
-class Person: Object, Identifiable {
-    @Persisted(primaryKey: true) var _id: String
-    @Persisted var name: String
-    @Persisted var age: Int
-}
-
 struct MealView: View {
     
     @ObservedObject var viewModel: MealViewModel

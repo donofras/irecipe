@@ -17,6 +17,7 @@ class CategoryViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var selectedMeal: Meal?
     @Published var showMeal = false
+    @Published var isLoading = false
 
     private var cancellableSet: Set<AnyCancellable> = []
     private var dataManager: NetworkProtocol
@@ -36,6 +37,7 @@ class CategoryViewModel: ObservableObject {
     }
     
     func getAllCategories() {
+        isLoading = true
         dataManager.fetchCategories()
             .sink { [weak self] (dataResponse) in
                 guard let `self` = self else { return }
@@ -43,18 +45,22 @@ class CategoryViewModel: ObservableObject {
                     self.createAlert(with: dataResponse.error!)
                 } else {
                     self.categories = dataResponse.value?.categories ?? []
+                    self.isLoading = false
                 }
             }.store(in: &cancellableSet)
     }
     
     func getMealById(id: String) {
+        isLoading = true
         dataManager.fetchMealById(id: id)
-            .sink { (dataResponse) in
+            .sink { [weak self]  (dataResponse) in
+                guard let `self` = self else { return }
                 if dataResponse.error != nil {
                     self.createAlert(with: dataResponse.error!)
                 } else {
                     self.selectedMeal = dataResponse.value?.meals?.first
                     self.showMeal = true
+                    self.isLoading = false
                 }
             }.store(in: &cancellableSet)
     }
@@ -65,6 +71,7 @@ class CategoryViewModel: ObservableObject {
             recipse = []
             return
         }
+        isLoading = true
         dataManager.fetchMealByName(name: name)
             .sink { [weak self] (dataResponse) in
                 guard let `self` = self else { return }
@@ -72,6 +79,7 @@ class CategoryViewModel: ObservableObject {
                     self.createAlert(with: dataResponse.error!)
                 } else {
                     self.recipse = dataResponse.value?.meals ?? []
+                    self.isLoading = false
                 }
             }.store(in: &cancellableSet)
     }
@@ -79,5 +87,6 @@ class CategoryViewModel: ObservableObject {
     func createAlert( with error: NetworkError ) {
         loadingError = error.backendError == nil ? error.initialError.localizedDescription : error.backendError!.message
         showAlert = true
+        isLoading = false
     }
 }

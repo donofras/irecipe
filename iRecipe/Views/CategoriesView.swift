@@ -76,6 +76,12 @@ struct CategoriesView: View {
                     }
                 }
             }
+            .overlay() {
+                if viewModel.isLoading {
+                    ProgressView()
+                        .frame(width: 50, height: 50, alignment: .center)
+                }
+            }
         }
         .searchable(text: $viewModel.searchText, prompt: "Look for recipes")
     }

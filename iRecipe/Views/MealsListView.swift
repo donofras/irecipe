@@ -48,6 +48,12 @@ struct MealsListView: View {
                     .padding(.horizontal)
                 }
             }
+            .overlay() {
+                if viewModel.isLoading {
+                    ProgressView()
+                        .frame(width: 50, height: 50, alignment: .center)
+                }
+            }
         }
         .navigationTitle("Category: \(viewModel.mealCategory)")
         .navigationDestination(isPresented: $viewModel.showMeal, destination: {
